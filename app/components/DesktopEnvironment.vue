@@ -9,6 +9,9 @@
   //- Menu bar (desktop only — lives in the desktop shell)
   TopMenuBar
 
+  //- Ambient system widgets (wide screens only; sits behind windows)
+  DesktopWidgets
+
   //- Welcome hint when nothing is open
   Transition(name="fade")
     .desk__welcome(v-if="openWindowIds.length === 0")
@@ -21,15 +24,23 @@
 
   //- Dock
   OSDock
+
+  //- First-run welcome + Spotlight command palette (⌘K)
+  Onboarding
+  CommandPalette
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useOS } from '~/composables/useOS'
+import { useShortcuts } from '~/composables/useShortcuts'
 
 const { openWindowIds, openApp } = useOS()
 
-// Boot with the Identity app so the desktop is never empty on first paint.
+// Global keymap: ⌘K palette, Esc, ⌘W.
+useShortcuts()
+
+// Only boot Identity when there's no restored session (first-ever visit).
 onMounted(() => {
   if (openWindowIds.value.length === 0) openApp('identity')
 })

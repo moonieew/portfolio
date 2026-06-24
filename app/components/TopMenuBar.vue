@@ -6,6 +6,11 @@ header.bar
     span.bar__app {{ activeName }}
     span.bar__menu(v-for="m in menus" :key="m") {{ m }}
   .bar__right
+    button.bar__search(type="button" title="Search (⌘K)" @click="palette.show()")
+      span.bar__search-ico ⌕
+      span.bar__search-txt Search
+      kbd.bar__search-kbd ⌘K
+    span.bar__sep
     a.bar__link(
       v-for="s in socials"
       :key="s.label"
@@ -34,8 +39,11 @@ header.bar
 import { computed } from 'vue'
 import { useNow } from '@vueuse/core'
 import { useOS } from '~/composables/useOS'
+import { useCommandPalette } from '~/composables/useCommandPalette'
+import { profile } from '~/composables/useProfile'
 
 const { activeId, getApp } = useOS()
+const palette = useCommandPalette()
 
 const activeName = computed(() => {
   const a = activeId.value ? getApp(activeId.value) : null
@@ -44,10 +52,9 @@ const activeName = computed(() => {
 
 const menus = ['File', 'Edit', 'View', 'Window']
 
-// Replace hrefs with your real profiles.
 const socials = [
-  { label: 'GitHub', title: 'GitHub profile', href: 'https://github.com/' },
-  { label: 'LinkedIn', title: 'LinkedIn profile', href: 'https://www.linkedin.com/' },
+  { label: 'GitHub', title: 'GitHub profile', href: profile.github },
+  { label: 'LinkedIn', title: 'LinkedIn profile', href: profile.linkedin },
 ]
 
 const now = useNow({ interval: 1000 })
@@ -99,6 +106,24 @@ const stamp = computed(() => {
   transition: color 0.15s ease;
 }
 .bar__link:hover { color: var(--color-neon); }
+.bar__search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.45rem;
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.bar__search:hover { color: var(--color-fog); border-color: color-mix(in srgb, var(--color-neon) 35%, transparent); }
+.bar__search-ico { font-size: 0.8rem; }
+.bar__search-txt { font-size: 0.66rem; }
+@media (max-width: 720px) { .bar__search-txt { display: none; } }
+.bar__search-kbd { font-size: 0.58rem; padding: 0.05rem 0.3rem; border-radius: 0.3rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); }
 .bar__sep { width: 1px; height: 14px; background: rgba(255, 255, 255, 0.12); }
 .bar__stat { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--color-fog); }
 .bar__icon { height: 12px; width: auto; display: block; }

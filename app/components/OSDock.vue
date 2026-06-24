@@ -6,12 +6,12 @@
       :key="a.id"
       type="button"
       :class="[`dock__app--${a.accent}`, { 'is-open': isOpen(a.id), 'is-active': activeId === a.id }]"
-      :title="a.name"
+      :aria-label="a.name"
       @click="dockToggle(a.id)"
     )
       span.dock__icon {{ a.icon }}
-      span.dock__tip {{ a.short }}
       span.dock__indicator
+      span.dock__tip(role="tooltip") {{ a.name }}
 </template>
 
 <script setup lang="ts">
@@ -60,22 +60,41 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
 
 .dock__tip {
   position: absolute;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 12px);
   left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
+  transform: translateX(-50%) translateY(6px) scale(0.92);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   white-space: nowrap;
   color: var(--color-fog);
-  background: rgba(20, 20, 22, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(28, 28, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.9);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: opacity 0.16s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.dock__app:hover .dock__tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+.dock__tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(28, 28, 32, 0.96);
+}
+.dock__app:hover .dock__tip,
+.dock__app:focus-visible .dock__tip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dock__tip { transition: opacity 0.16s ease; }
+}
 
 .dock__indicator {
   position: absolute;

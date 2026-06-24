@@ -1,11 +1,13 @@
-import { computed, markRaw, reactive, ref } from 'vue'
+import { computed, markRaw, reactive, ref, watch } from 'vue'
 import type { Component } from 'vue'
+import { persisted } from '~/composables/usePersistentState'
 import AppIdentity from '~/components/AppIdentity.vue'
 import AppDatagram from '~/components/AppDatagram.vue'
 import AppWeb3 from '~/components/AppWeb3.vue'
 import AppCreative from '~/components/AppCreative.vue'
 import AppExperience from '~/components/AppExperience.vue'
 import AppContact from '~/components/AppContact.vue'
+import AppResume from '~/components/AppResume.vue'
 
 export type Accent = 'neon' | 'purple' | 'blue' | 'mono'
 
@@ -48,6 +50,16 @@ const APPS: AppDef[] = [
     blurb: 'whoami — terminal intro',
     component: markRaw(AppIdentity),
     size: { w: 680, h: 480 },
+  },
+  {
+    id: 'resume',
+    name: 'Résumé',
+    short: 'Résumé',
+    icon: '▦',
+    accent: 'neon',
+    blurb: 'CV · download PDF',
+    component: markRaw(AppResume),
+    size: { w: 760, h: 620 },
   },
   {
     id: 'datagram',
@@ -105,16 +117,56 @@ const APPS: AppDef[] = [
  *  Singleton OS state (module scope → shared by every consumer).
  *  Only mutated on the client (the OS is rendered inside <ClientOnly>).
  * ------------------------------------------------------------------ */
-const windows = reactive<Record<string, WindowState>>({})
-const order = ref<string[]>([])
-const activeId = ref<string | null>(null)
-const zTop = ref(10)
+interface Session {
+  windows: Record<string, WindowState>
+  order: string[]
+  activeId: string | null
+  zTop: number
+}
+
+// Restored from localStorage on the client; empty on the server.
+const snap = persisted<Session>('anna-os:session', {
+  windows: {},
+  order: [],
+  activeId: null,
+  zTop: 10,
+})
+
+const windows = reactive<Record<string, WindowState>>(snap.value.windows)
+const order = ref<string[]>(snap.value.order)
+const activeId = ref<string | null>(snap.value.activeId)
+const zTop = ref(snap.value.zTop)
+
+// Mirror live state back into the persisted snapshot on any change.
+if (import.meta.client) {
+  watch(
+    [windows, order, activeId, zTop],
+    () => {
+      snap.value = {
+        windows: JSON.parse(JSON.stringify(windows)),
+        order: [...order.value],
+        activeId: activeId.value,
+        zTop: zTop.value,
+      }
+    },
+    { deep: true },
+  )
+}
 
 // Mobile only ever shows one full-screen app at a time.
 const mobileAppId = ref<string | null>(null)
 
 function getApp(id: string): AppDef | undefined {
   return APPS.find((a) => a.id === id)
+}
+
+// Drop any restored windows whose app no longer exists in the registry.
+if (import.meta.client) {
+  for (const id of Object.keys(windows)) {
+    if (!getApp(id)) delete windows[id]
+  }
+  order.value = order.value.filter((id) => windows[id])
+  if (activeId.value && !windows[activeId.value]) activeId.value = null
 }
 
 function topmostOpen(exclude?: string): string | null {
