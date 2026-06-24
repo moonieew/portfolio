@@ -119,7 +119,7 @@ const dragStyle = computed(() => ({
   cursor: pointer;
 }
 
-.screen__body { flex: 1; min-height: 0; overflow: hidden; }
+.screen__body { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .screen__foot { flex: none; padding: 0.5rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 .screen__hint { font-family: var(--font-mono); font-size: 0.62rem; color: var(--color-muted); }
 </style>

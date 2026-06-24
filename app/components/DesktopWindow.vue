@@ -24,6 +24,18 @@
   //- App content (manages its own internal scroll)
   .win__body
     component(:is="app?.component")
+
+  //- Resize handles — 4 edges + 4 corners (hidden while maximized)
+  template(v-if="!win.maximized")
+    .win__rs(
+      v-for="d in RESIZE_DIRS"
+      :key="d"
+      :class="`win__rs--${d}`"
+      @pointerdown="startResize(d, $event)"
+      @pointermove="onResize"
+      @pointerup="endResize"
+      @pointercancel="endResize"
+    )
 </template>
 
 <script setup lang="ts">
@@ -50,6 +62,67 @@ const { x, y } = useDraggable(el, {
   preventDefault: true,
   onStart: () => focusApp(props.appId),
 })
+
+/* ----- Edge / corner resize ----------------------------------------
+ * Position (x/y) is owned by useDraggable; size (w/h) lives in the OS
+ * store. Dragging a west/north handle changes both — we pin the opposite
+ * edge so the box grows from the grabbed side. */
+const RESIZE_DIRS = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'] as const
+const MIN_W = 320
+const MIN_H = 200
+
+let rs = { dir: '', mx: 0, my: 0, x: 0, y: 0, w: 0, h: 0 }
+
+function startResize(dir: string, e: PointerEvent) {
+  const w = win.value
+  if (!w || w.maximized) return
+  e.preventDefault()
+  e.stopPropagation()
+  focusApp(props.appId)
+  rs = { dir, mx: e.clientX, my: e.clientY, x: x.value, y: y.value, w: w.w, h: w.h }
+  ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+}
+
+function onResize(e: PointerEvent) {
+  const w = win.value
+  if (!rs.dir || !w) return
+  const dx = e.clientX - rs.mx
+  const dy = e.clientY - rs.my
+  let nx = rs.x
+  let ny = rs.y
+  let nw = rs.w
+  let nh = rs.h
+  if (rs.dir.includes('e')) nw = Math.max(MIN_W, rs.w + dx)
+  if (rs.dir.includes('s')) nh = Math.max(MIN_H, rs.h + dy)
+  if (rs.dir.includes('w')) {
+    nw = Math.max(MIN_W, rs.w - dx)
+    nx = rs.x + rs.w - nw // keep the right edge fixed
+  }
+  if (rs.dir.includes('n')) {
+    nh = Math.max(MIN_H, rs.h - dy)
+    ny = rs.y + rs.h - nh // keep the bottom edge fixed
+  }
+  w.w = nw
+  w.h = nh
+  x.value = nx
+  y.value = ny
+}
+
+function endResize(e: PointerEvent) {
+  if (!rs.dir) return
+  rs.dir = ''
+  // Persist the final position back into the store so a reopen restores it.
+  const w = win.value
+  if (w) {
+    w.x = x.value
+    w.y = y.value
+  }
+  try {
+    ;(e.target as HTMLElement).releasePointerCapture(e.pointerId)
+  } catch {
+    /* pointer already released */
+  }
+}
 
 const winStyle = computed(() => {
   const w = win.value
@@ -143,5 +216,23 @@ const winStyle = computed(() => {
   text-overflow: ellipsis;
 }
 
-.win__body { flex: 1; min-height: 0; overflow: hidden; background: var(--color-ink-soft); }
+/* position: relative → containing block for apps whose root is absolute,
+ * so their content can't escape over the title bar. */
+.win__body { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--color-ink-soft); }
+
+/* Resize handles — invisible hit zones hugging each edge / corner.
+ * Edges sit at z 5, corners at z 6 so the corner always wins the overlap. */
+.win__rs { position: absolute; z-index: 5; touch-action: none; }
+.win__rs--n { top: 0; left: 0; right: 0; height: 7px; cursor: ns-resize; }
+.win__rs--s { bottom: 0; left: 0; right: 0; height: 7px; cursor: ns-resize; }
+.win__rs--e { top: 0; bottom: 0; right: 0; width: 7px; cursor: ew-resize; }
+.win__rs--w { top: 0; bottom: 0; left: 0; width: 7px; cursor: ew-resize; }
+.win__rs--ne,
+.win__rs--nw,
+.win__rs--se,
+.win__rs--sw { width: 16px; height: 16px; z-index: 6; }
+.win__rs--ne { top: 0; right: 0; cursor: nesw-resize; }
+.win__rs--nw { top: 0; left: 0; cursor: nwse-resize; }
+.win__rs--se { bottom: 0; right: 0; cursor: nwse-resize; }
+.win__rs--sw { bottom: 0; left: 0; cursor: nesw-resize; }
 </style>

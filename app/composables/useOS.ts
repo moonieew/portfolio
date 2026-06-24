@@ -8,6 +8,7 @@ import AppCreative from '~/components/AppCreative.vue'
 import AppExperience from '~/components/AppExperience.vue'
 import AppContact from '~/components/AppContact.vue'
 import AppResume from '~/components/AppResume.vue'
+import App3DConfigurator from '~/components/App3DConfigurator.vue'
 
 export type Accent = 'neon' | 'purple' | 'blue' | 'mono'
 
@@ -100,6 +101,16 @@ const APPS: AppDef[] = [
     blurb: 'Brand identity · the hidden gem',
     component: markRaw(AppCreative),
     size: { w: 840, h: 600 },
+  },
+  {
+    id: 'configurator',
+    name: '3D Configurator',
+    short: 'Configure',
+    icon: '☕',
+    accent: 'purple',
+    blurb: 'WebGL mug · live material + decal',
+    component: markRaw(App3DConfigurator),
+    size: { w: 860, h: 580 },
   },
   {
     id: 'contact',
