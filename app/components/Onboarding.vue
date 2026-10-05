@@ -2,9 +2,10 @@
 Transition(name="onb")
   aside.onb(v-if="visible" role="status" aria-live="polite")
     .onb__head
-      span.onb__mark A
+      span.onb__mark
+        LogoMark(:size="22")
       .onb__titles
-        p.onb__title Welcome to Anna OS
+        p.onb__title Welcome to MN OS
         p.onb__sub A portfolio you can actually use
       button.onb__x(type="button" aria-label="Dismiss welcome" @click="dismiss") ✕
     ul.onb__list
@@ -24,10 +25,12 @@ Transition(name="onb")
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { useLockScreen } from '~/composables/useLockScreen'
 
-const KEY = 'anna-os:onboarded'
+const KEY = 'mn-os:onboarded'
 const visible = ref(false)
+const { locked } = useLockScreen()
 
 onMounted(() => {
   let seen = false
@@ -36,7 +39,18 @@ onMounted(() => {
   } catch {
     /* storage unavailable → treat as first visit */
   }
-  if (!seen) setTimeout(() => (visible.value = true), 900)
+  if (seen) return
+  // Wait for the lock screen to be dismissed before greeting.
+  let fired = false
+  watch(
+    locked,
+    (l) => {
+      if (l || fired) return
+      fired = true
+      setTimeout(() => (visible.value = true), 1100)
+    },
+    { immediate: true },
+  )
 })
 
 function dismiss() {
@@ -62,7 +76,7 @@ function dismiss() {
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid color-mix(in srgb, var(--color-neon) 22%, transparent);
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 30px 80px -30px var(--shadow-strong);
 }
 .onb__head { display: flex; align-items: center; gap: 0.6rem; }
 .onb__mark {
@@ -73,7 +87,7 @@ function dismiss() {
   border-radius: 0.6rem;
   font-weight: 800;
   color: var(--color-neon);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--veil-2);
   border: 1px solid color-mix(in srgb, var(--color-neon) 30%, transparent);
 }
 .onb__titles { flex: 1; min-width: 0; }
@@ -115,7 +129,7 @@ function dismiss() {
   font-weight: 600;
   font-size: 0.82rem;
   color: #0a1f12;
-  background: linear-gradient(100deg, var(--color-neon), #59ffa0);
+  background: linear-gradient(100deg, var(--color-neon), var(--neon-2));
   border: none;
   cursor: pointer;
   transition: filter 0.15s ease;

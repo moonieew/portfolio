@@ -70,8 +70,8 @@ const zone = 'GMT+7 · Indochina'
   background: color-mix(in srgb, var(--color-surface) 50%, transparent);
   backdrop-filter: blur(18px) saturate(150%);
   -webkit-backdrop-filter: blur(18px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 20px 50px -30px var(--shadow-mid);
 }
 .wid__card--status { border-color: color-mix(in srgb, var(--color-neon) 22%, transparent); }
 
@@ -95,8 +95,8 @@ const zone = 'GMT+7 · Indochina'
   padding: 0.16rem 0.42rem;
   border-radius: 999px;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
 }
 
 .wid__clock { font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--color-fog); letter-spacing: 0.02em; }

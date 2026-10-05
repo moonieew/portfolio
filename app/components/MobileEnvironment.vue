@@ -8,9 +8,14 @@
   header.mob__status
     span.mob__time {{ clock }}
     span.mob__sys
-      span Anna OS
+      span MN OS
       span.mob__sig ●●●●
       span 100%
+      button.mob__theme(
+        type="button"
+        :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        @click="toggleTheme"
+      ) {{ theme === 'dark' ? '☀' : '☾' }}
 
   //- Home screen
   .mob__home
@@ -37,8 +42,10 @@
 import { computed } from 'vue'
 import { useNow } from '@vueuse/core'
 import { useOS } from '~/composables/useOS'
+import { useTheme } from '~/composables/useTheme'
 
 const { apps, mobileApp, openMobile } = useOS()
+const { theme, toggle: toggleTheme } = useTheme()
 
 const now = useNow({ interval: 1000 })
 const clock = computed(() =>
@@ -67,6 +74,20 @@ const clock = computed(() =>
 .mob__time { font-weight: 700; }
 .mob__sys { display: flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
 .mob__sig { letter-spacing: -1px; color: var(--color-neon); }
+.mob__theme {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--color-fog);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+}
 
 .mob__home { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; padding: 1.4rem 1.2rem 2rem; }
 .mob__hero { margin: 1.5rem 0 2.2rem; }
@@ -75,7 +96,7 @@ const clock = computed(() =>
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.05;
-  background: linear-gradient(120deg, #fff, #9a9aa2);
+  background: linear-gradient(120deg, var(--title-a), var(--title-c));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -92,14 +113,14 @@ const clock = computed(() =>
   font-size: 1.7rem;
   border-radius: 1.1rem;
   background: color-mix(in srgb, var(--color-surface) 75%, transparent);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 30px -16px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--hairline-2);
+  box-shadow: 0 12px 30px -16px var(--shadow-strong);
   transition: transform 0.15s ease;
 }
 .mob__app:active .mob__icon { transform: scale(0.92); }
 .mob__app--neon .mob__icon { color: var(--color-neon); }
 .mob__app--purple .mob__icon { color: var(--color-purple); }
-.mob__app--blue .mob__icon { color: #3b82f6; }
+.mob__app--blue .mob__icon { color: var(--color-blue); }
 .mob__label { font-size: 0.72rem; color: var(--color-fog); }
 
 /* Slide-up transition for the full-screen app */

@@ -144,16 +144,16 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   gap: 0.9rem;
   height: 40px;
   padding: 0 0.8rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--veil-1);
 }
 .fx__nav { display: flex; gap: 0.3rem; }
 .fx__navbtn {
   width: 22px;
   height: 22px;
   border-radius: 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline);
+  background: var(--veil-1);
   color: var(--color-muted);
   font-size: 0.8rem;
   cursor: default;
@@ -163,7 +163,7 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
 .fx__crumb-seg.is-current { color: var(--color-fog); font-weight: 600; }
 .fx__crumb-sep { color: var(--color-muted); opacity: 0.6; }
 .fx__view { margin-left: auto; display: flex; gap: 4px; }
-.fx__view-dot { width: 5px; height: 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); }
+.fx__view-dot { width: 5px; height: 5px; border-radius: 999px; background: var(--hairline-3); }
 
 /* Main split */
 .fx__main { flex: 1; min-height: 0; display: flex; }
@@ -174,8 +174,8 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   width: 184px;
   padding: 0.7rem 0.6rem;
   overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.015);
+  border-right: 1px solid var(--hairline);
+  background: var(--veil-1);
 }
 .fx__side-label {
   font-family: var(--font-mono);
@@ -200,7 +200,7 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.fx__dir:hover { background: rgba(255, 255, 255, 0.04); }
+.fx__dir:hover { background: var(--veil-2); }
 .fx__dir.is-active { background: color-mix(in srgb, var(--color-neon) 16%, transparent); }
 .fx__dir.is-static { color: var(--color-muted); cursor: default; }
 .fx__dir-icon { color: var(--color-neon); font-size: 0.85rem; }
@@ -209,7 +209,7 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
 
 /* Content */
 .fx__content { flex: 1; min-height: 0; display: flex; flex-direction: column; }
-.fx__head { flex: none; padding: 1rem 1.1rem 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.fx__head { flex: none; padding: 1rem 1.1rem 0.8rem; border-bottom: 1px solid var(--hairline); }
 .fx__head-row { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
 .fx__company { font-size: 1.1rem; font-weight: 700; }
 .fx__role {
@@ -236,11 +236,11 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
 .fx__file {
   padding: 0.85rem;
   border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--veil-1);
+  border: 1px solid var(--hairline);
   transition: transform 0.18s ease, border-color 0.2s ease;
 }
-.fx__file:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.16); }
+.fx__file:hover { transform: translateY(-3px); border-color: var(--hairline-3); }
 .fx__file-ico {
   width: 40px;
   height: 40px;
@@ -249,12 +249,12 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   border-radius: 0.55rem;
   font-size: 1.15rem;
   margin-bottom: 0.6rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
 }
 .fx__file-ico.is-neon { color: var(--color-neon); }
 .fx__file-ico.is-purple { color: var(--color-purple); }
-.fx__file-ico.is-blue { color: #3b82f6; }
+.fx__file-ico.is-blue { color: var(--color-blue); }
 .fx__file-name { font-weight: 700; font-size: 0.92rem; }
 .fx__file-tech { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.5rem 0; }
 .fx__file-tech li {
@@ -263,8 +263,8 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   padding: 0.16rem 0.42rem;
   border-radius: 999px;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
 }
 .fx__file-impact { font-size: 0.78rem; line-height: 1.5; color: var(--color-muted); }
 
@@ -274,7 +274,7 @@ const active = computed(() => companies.find((c) => c.id === activeId.value) ?? 
   justify-content: space-between;
   gap: 1rem;
   padding: 0.45rem 1.1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--hairline);
   font-family: var(--font-mono);
   font-size: 0.62rem;
   color: var(--color-muted);

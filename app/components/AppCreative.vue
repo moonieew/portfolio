@@ -14,10 +14,10 @@ SketchToScreen(
       .vec__grid
         .vec__cell(v-for="b in brands" :key="b.key")
           svg.vec__svg(viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet")
-            path.animate-dash(:d="b.path" fill="none" stroke="#cfd3da" stroke-width="1.4" stroke-dasharray="4 4")
-            g(fill="none" stroke="#cfd3da" stroke-width="1.2")
+            path.animate-dash(:d="b.path" fill="none" style="stroke: var(--sketch-strong)" stroke-width="1.4" stroke-dasharray="4 4")
+            g(fill="none" style="stroke: var(--sketch-strong)" stroke-width="1.2")
               rect(v-for="(p, n) in b.anchors" :key="n" :x="p[0] - 3" :y="p[1] - 3" width="6" height="6")
-            line(:x1="b.handle[0]" :y1="b.handle[1]" :x2="b.handle[2]" :y2="b.handle[3]" stroke="#6f7480" stroke-width="1")
+            line(:x1="b.handle[0]" :y1="b.handle[1]" :x2="b.handle[2]" :y2="b.handle[3]" style="stroke: var(--sketch-dim)" stroke-width="1")
 
   //- Final: rendered packaging / logo layout
   template(#final)
@@ -70,9 +70,9 @@ const brands = [
 /* Vectors */
 .vec { position: absolute; inset: 0; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.6rem; }
 .vec__label,
-.pack__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: #9aa0aa; }
+.pack__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: var(--sketch); }
 .vec__grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; min-height: 0; }
-.vec__cell { border: 1px dashed rgba(255, 255, 255, 0.14); border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; }
+.vec__cell { border: 1px dashed var(--hairline-2); border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; }
 .vec__svg { width: 100%; height: 100%; padding: 14%; }
 
 /* Rendered packaging */
@@ -83,9 +83,9 @@ const brands = [
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  background: radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, #3b82f6 18%, transparent), transparent 60%), var(--color-ink-soft);
+  background: radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--color-blue) 18%, transparent), transparent 60%), var(--color-ink-soft);
 }
-.pack__label { color: #8fb4ff; }
+.pack__label { color: var(--color-blue); }
 .pack__grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; min-height: 0; }
 .pack__cell {
   border-radius: 0.7rem;
@@ -94,7 +94,7 @@ const brands = [
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--hairline);
 }
 .pack__cell--araya { background: linear-gradient(160deg, #14241a, #0c140f); color: #eafff2; }
 .pack__cell--araya .pack__mark { color: var(--color-neon); text-shadow: 0 0 22px color-mix(in srgb, var(--color-neon) 55%, transparent); }

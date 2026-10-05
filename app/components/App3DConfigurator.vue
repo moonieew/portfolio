@@ -368,7 +368,7 @@ onBeforeUnmount(stopScene)
   inset: 0;
   display: flex;
   background:
-    radial-gradient(120% 90% at 50% 18%, #202028 0%, transparent 55%),
+    radial-gradient(120% 90% at 50% 18%, color-mix(in srgb, var(--color-fog) 7%, transparent) 0%, transparent 55%),
     radial-gradient(80% 60% at 80% 100%, color-mix(in srgb, var(--color-purple) 20%, transparent), transparent 60%),
     var(--color-ink);
   overflow: hidden;
@@ -381,7 +381,7 @@ onBeforeUnmount(stopScene)
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(70% 70% at 50% 45%, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  background: radial-gradient(70% 70% at 50% 45%, transparent 55%, var(--vignette) 100%);
 }
 .cfg__hint {
   position: absolute;
@@ -408,8 +408,8 @@ onBeforeUnmount(stopScene)
 }
 .cfg__svgwrap:active { cursor: grabbing; }
 .cfg__svgrot { width: min(62%, 240px); transform-style: preserve-3d; will-change: transform; }
-.cfg__svg { width: 100%; height: auto; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.6)); }
-.cfg__svghandle { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35)); }
+.cfg__svg { width: 100%; height: auto; filter: drop-shadow(0 26px 30px var(--shadow-mid)); }
+.cfg__svghandle { filter: drop-shadow(0 2px 2px var(--shadow-soft)); }
 
 /* Control panel — floats over the stage, but is bounded to it so a short
  * window can never clip it: overflow scrolls inside the panel instead. */
@@ -430,8 +430,8 @@ onBeforeUnmount(stopScene)
   background: color-mix(in srgb, var(--color-surface) 62%, transparent);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--hairline-2);
+  box-shadow: 0 24px 60px -28px var(--shadow-strong);
 }
 .cfg__phead { display: flex; align-items: baseline; justify-content: space-between; }
 .cfg__ptitle { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em; }
@@ -458,8 +458,8 @@ onBeforeUnmount(stopScene)
   gap: 0.3rem;
   padding: 0.22rem;
   border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
 }
 .cfg__segbtn {
   padding: 0.4rem 0.3rem;
@@ -479,8 +479,8 @@ onBeforeUnmount(stopScene)
   position: relative;
   height: 76px;
   border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-1);
+  border: 1px solid var(--hairline);
   cursor: crosshair;
   touch-action: none;
   overflow: hidden;
@@ -489,8 +489,8 @@ onBeforeUnmount(stopScene)
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 .cfg__knob {
@@ -500,7 +500,7 @@ onBeforeUnmount(stopScene)
   border-radius: 999px;
   transform: translate(-50%, -50%);
   background: var(--color-neon);
-  box-shadow: 0 0 14px var(--color-neon), 0 0 0 4px rgba(0, 255, 102, 0.18);
+  box-shadow: 0 0 14px var(--color-neon), 0 0 0 4px color-mix(in srgb, var(--color-neon) 18%, transparent);
   pointer-events: none;
 }
 
@@ -510,7 +510,7 @@ onBeforeUnmount(stopScene)
   width: 18px;
   height: 18px;
   border-radius: 0.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--hairline-3);
   cursor: pointer;
   padding: 0;
   font-size: 0.6rem;
@@ -520,14 +520,14 @@ onBeforeUnmount(stopScene)
   place-items: center;
 }
 .cfg__tool.is-on { box-shadow: 0 0 0 2px var(--color-fog); }
-.cfg__tool--erase, .cfg__tool--clear { background: rgba(255, 255, 255, 0.06); }
+.cfg__tool--erase, .cfg__tool--clear { background: var(--veil-2); }
 .cfg__draw {
   width: 100%;
   aspect-ratio: 2 / 1;
   height: auto;
   border-radius: 0.5rem;
   background: #f4f4f6;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--hairline-2);
   cursor: crosshair;
   touch-action: none;
 }
@@ -537,8 +537,8 @@ onBeforeUnmount(stopScene)
   border-radius: 0.45rem;
   font-size: 0.72rem;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline-2);
   outline: none;
 }
 .cfg__text:focus { border-color: color-mix(in srgb, var(--color-neon) 50%, transparent); }

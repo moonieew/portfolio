@@ -1,8 +1,9 @@
 <template lang="pug">
 header.bar
   .bar__left
-    span.bar__logo ⌘
-    span.bar__os Anna OS
+    span.bar__logo
+      LogoMark(:size="16")
+    span.bar__os MN OS
     span.bar__app {{ activeName }}
     span.bar__menu(v-for="m in menus" :key="m") {{ m }}
   .bar__right
@@ -10,6 +11,17 @@ header.bar
       span.bar__search-ico ⌕
       span.bar__search-txt Search
       kbd.bar__search-kbd ⌘K
+    button.bar__theme(
+      type="button"
+      :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+      :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="toggleTheme"
+    )
+      svg.bar__theme-ico(v-if="theme === 'dark'" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round")
+        circle(cx="8" cy="8" r="3.2")
+        path(d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1")
+      svg.bar__theme-ico(v-else viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round")
+        path(d="M13.5 9.8A6 6 0 1 1 6.2 2.5a4.8 4.8 0 0 0 7.3 7.3z")
     span.bar__sep
     a.bar__link(
       v-for="s in socials"
@@ -40,10 +52,12 @@ import { computed } from 'vue'
 import { useNow } from '@vueuse/core'
 import { useOS } from '~/composables/useOS'
 import { useCommandPalette } from '~/composables/useCommandPalette'
+import { useTheme } from '~/composables/useTheme'
 import { profile } from '~/composables/useProfile'
 
 const { activeId, getApp } = useOS()
 const palette = useCommandPalette()
+const { theme, toggle: toggleTheme } = useTheme()
 
 const activeName = computed(() => {
   const a = activeId.value ? getApp(activeId.value) : null
@@ -85,13 +99,13 @@ const stamp = computed(() => {
   justify-content: space-between;
   padding: 0 0.9rem;
   font-size: 0.74rem;
-  background: rgba(18, 18, 18, 0.72);
+  background: var(--chrome);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--hairline);
 }
 .bar__left { display: flex; align-items: center; gap: 1.05rem; }
-.bar__logo { font-size: 0.85rem; }
+.bar__logo { display: inline-flex; align-items: center; }
 .bar__os { font-weight: 700; }
 .bar__app { font-weight: 600; color: var(--color-fog); }
 .bar__menu { color: var(--color-muted); }
@@ -113,8 +127,8 @@ const stamp = computed(() => {
   padding: 0.15rem 0.5rem;
   border-radius: 0.45rem;
   color: var(--color-muted);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
   cursor: pointer;
   font-family: var(--font-mono);
   transition: border-color 0.15s ease, color 0.15s ease;
@@ -123,8 +137,24 @@ const stamp = computed(() => {
 .bar__search-ico { font-size: 0.8rem; }
 .bar__search-txt { font-size: 0.66rem; }
 @media (max-width: 720px) { .bar__search-txt { display: none; } }
-.bar__search-kbd { font-size: 0.58rem; padding: 0.05rem 0.3rem; border-radius: 0.3rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); }
-.bar__sep { width: 1px; height: 14px; background: rgba(255, 255, 255, 0.12); }
+.bar__search-kbd { font-size: 0.58rem; padding: 0.05rem 0.3rem; border-radius: 0.3rem; background: var(--veil-2); border: 1px solid var(--hairline-2); }
+.bar__sep { width: 1px; height: 14px; background: var(--hairline-2); }
+.bar__theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border-radius: 0.4rem;
+  color: var(--color-muted);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.bar__theme:hover { color: var(--color-fog); background: var(--veil-3); }
+.bar__theme-ico { width: 13px; height: 13px; }
 .bar__stat { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--color-fog); }
 .bar__icon { height: 12px; width: auto; display: block; }
 .bar__battery .bar__icon { width: 26px; }

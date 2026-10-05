@@ -136,7 +136,7 @@ interface Session {
 }
 
 // Restored from localStorage on the client; empty on the server.
-const snap = persisted<Session>('anna-os:session', {
+const snap = persisted<Session>('mn-os:session', {
   windows: {},
   order: [],
   activeId: null,

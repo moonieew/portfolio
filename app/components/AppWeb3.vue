@@ -54,18 +54,18 @@ const chains = ['Ethereum', 'Solana', 'Base', 'Arbitrum']
 <style scoped>
 /* User flow */
 .flow { position: absolute; inset: 0; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.flow__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: #9aa0aa; }
+.flow__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: var(--sketch); }
 .flow__row { flex: 1; display: flex; align-items: center; gap: 0.5rem; }
-.flow__box { flex: 1; align-self: stretch; max-height: 78%; margin: auto 0; border: 1.4px dashed #9aa0aa; border-radius: 8px; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
-.flow__box-bar { height: 8px; width: 60%; border-radius: 3px; background: #6f7480; }
-.flow__box-line { height: 6px; border-radius: 3px; background: #3c4049; }
+.flow__box { flex: 1; align-self: stretch; max-height: 78%; margin: auto 0; border: 1.4px dashed var(--sketch); border-radius: 8px; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.flow__box-bar { height: 8px; width: 60%; border-radius: 3px; background: var(--sketch-dim); }
+.flow__box-line { height: 6px; border-radius: 3px; background: var(--veil-3); }
 .flow__box-line.is-short { width: 50%; }
 .flow__box-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-.flow__box-grid span { height: 16px; border-radius: 4px; border: 1px solid #5b606b; }
-.flow__box-pill { height: 11px; border-radius: 999px; background: #4a4e58; width: 70%; }
+.flow__box-grid span { height: 16px; border-radius: 4px; border: 1px solid var(--hairline-3); }
+.flow__box-pill { height: 11px; border-radius: 999px; background: var(--veil-3); width: 70%; }
 .flow__box-pill.is-wide { width: 100%; }
-.flow__arrow { color: #9aa0aa; font-size: 1.1rem; }
-.flow__caption { font-family: var(--font-mono); font-size: 0.6rem; color: #7c8290; text-align: center; }
+.flow__arrow { color: var(--sketch); font-size: 1.1rem; }
+.flow__caption { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-muted); text-align: center; }
 
 /* Web3 UI */
 .w3 {
@@ -77,7 +77,7 @@ const chains = ['Ethereum', 'Solana', 'Base', 'Arbitrum']
   gap: 0.65rem;
   background:
     radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--color-purple) 35%, transparent), transparent 55%),
-    radial-gradient(120% 100% at 100% 100%, color-mix(in srgb, #2563eb 30%, transparent), transparent 55%),
+    radial-gradient(120% 100% at 100% 100%, color-mix(in srgb, var(--color-blue) 30%, transparent), transparent 55%),
     var(--color-ink-soft);
 }
 .w3__head { display: flex; align-items: center; justify-content: space-between; }
@@ -90,25 +90,25 @@ const chains = ['Ethereum', 'Solana', 'Base', 'Arbitrum']
   font-size: 0.6rem;
   padding: 0.18rem 0.5rem;
   border-radius: 999px;
-  color: #d9ccff;
+  color: color-mix(in srgb, var(--color-purple) 30%, var(--color-fog));
   background: color-mix(in srgb, var(--color-purple) 22%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-purple) 45%, transparent);
 }
 .w3__chain-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-purple); box-shadow: 0 0 10px var(--color-purple); }
-.w3__balance { display: flex; flex-direction: column; gap: 0.12rem; padding: 0.75rem 0.85rem; border-radius: 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(6px); }
-.w3__balance-k { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c9bdf0; }
+.w3__balance { display: flex; flex-direction: column; gap: 0.12rem; padding: 0.75rem 0.85rem; border-radius: 0.75rem; background: var(--veil-2); border: 1px solid var(--hairline-2); backdrop-filter: blur(6px); }
+.w3__balance-k { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in srgb, var(--color-purple) 35%, var(--color-fog)); }
 .w3__balance-v {
   font-size: clamp(1.2rem, 4vw, 1.8rem);
   font-weight: 800;
   letter-spacing: -0.01em;
-  background: linear-gradient(100deg, #fff, #c9bdf0);
+  background: linear-gradient(100deg, var(--title-a), color-mix(in srgb, var(--color-purple) 35%, var(--title-a)));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .w3__balance-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-neon); }
 .w3__chains { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-.w3__chip { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 999px; color: #e9e3ff; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); }
+.w3__chip { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 999px; color: color-mix(in srgb, var(--color-purple) 18%, var(--color-fog)); background: var(--veil-2); border: 1px solid var(--hairline-2); }
 .w3__actions { margin-top: auto; display: flex; gap: 0.45rem; }
 .w3__btn {
   flex: 1;
@@ -116,16 +116,16 @@ const chains = ['Ethereum', 'Solana', 'Base', 'Arbitrum']
   border-radius: 0.6rem;
   font-size: 0.76rem;
   font-weight: 600;
-  color: #e9e3ff;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: color-mix(in srgb, var(--color-purple) 18%, var(--color-fog));
+  background: var(--veil-2);
+  border: 1px solid var(--hairline-2);
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 .w3__btn:hover { transform: translateY(-1px); }
 .w3__btn.is-primary {
   color: #150a2e;
-  background: linear-gradient(100deg, var(--color-purple), #a78bfa);
+  background: linear-gradient(100deg, var(--color-purple), var(--purple-2));
   border-color: transparent;
   box-shadow: 0 8px 24px -10px var(--color-purple);
 }

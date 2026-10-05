@@ -15,7 +15,7 @@
   //- Welcome hint when nothing is open
   Transition(name="fade")
     .desk__welcome(v-if="openWindowIds.length === 0")
-      h1.desk__welcome-title Lê Thị Minh Nguyệt — Anna OS
+      h1.desk__welcome-title Lê Thị Minh Nguyệt — MN OS
       p.desk__welcome-sub Frontend Developer & System Architect
       p.desk__welcome-hint Open an app from the dock to explore the work ↓
 
@@ -69,7 +69,7 @@ onMounted(() => {
   font-size: clamp(1.6rem, 5vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(120deg, #fff, #9a9aa2);
+  background: linear-gradient(120deg, var(--title-a), var(--title-c));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

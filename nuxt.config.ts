@@ -10,6 +10,13 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en', class: 'dark' },
       title: 'Lê Thị Minh Nguyệt — System Architect & UI Developer',
+      script: [
+        {
+          // Apply the saved/OS-preferred theme before first paint (no flash).
+          innerHTML:
+            "(function(){try{var m=location.search.match(/[?&]theme=(light|dark)/);var t=m?m[1]:null;if(!t)t=localStorage.getItem('mn-os:theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}var c=document.documentElement.classList;c.remove('light','dark');c.add(t)}catch(e){}})()",
+        },
+      ],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#121212' },

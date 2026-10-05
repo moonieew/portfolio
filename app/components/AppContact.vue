@@ -83,8 +83,8 @@ function send() {
   gap: 1rem;
   height: 46px;
   padding: 0 0.8rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--veil-1);
 }
 .mail__send {
   display: inline-flex;
@@ -96,7 +96,7 @@ function send() {
   font-size: 0.78rem;
   font-weight: 600;
   color: #0a1f12;
-  background: linear-gradient(100deg, var(--color-neon), #59ffa0);
+  background: linear-gradient(100deg, var(--color-neon), var(--neon-2));
   box-shadow: 0 8px 22px -12px var(--color-neon);
   cursor: pointer;
 }
@@ -109,8 +109,8 @@ function send() {
   place-items: center;
   border-radius: 0.45rem;
   font-size: 0.85rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--veil-1);
+  border: 1px solid var(--hairline);
   cursor: default;
 }
 .mail__account {
@@ -127,7 +127,7 @@ function send() {
   align-items: center;
   gap: 0.8rem;
   padding: 0.7rem 0.2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--hairline);
 }
 .mail__label {
   flex: none;
@@ -144,7 +144,7 @@ function send() {
   font-size: 0.88rem;
   font-family: inherit;
 }
-.mail__input::placeholder { color: #54545c; }
+.mail__input::placeholder { color: var(--placeholder); }
 .mail__to { flex: 1; display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; font-weight: 600; }
 .mail__to-tag {
   font-family: var(--font-mono);
@@ -171,7 +171,7 @@ function send() {
   line-height: 1.6;
   font-family: inherit;
 }
-.mail__body::placeholder { color: #54545c; }
+.mail__body::placeholder { color: var(--placeholder); }
 
 .mail__foot {
   flex: none;
@@ -181,7 +181,7 @@ function send() {
   gap: 1rem;
   margin-top: 0.6rem;
   padding-top: 0.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--hairline);
 }
 .mail__signed { display: flex; align-items: center; gap: 0.6rem; }
 .mail__signed-mark { color: var(--color-purple); font-size: 1rem; }
@@ -198,8 +198,8 @@ function send() {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline-2);
   cursor: pointer;
   transition: transform 0.15s ease, border-color 0.2s ease;
 }

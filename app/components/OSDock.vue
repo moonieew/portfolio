@@ -37,8 +37,8 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
   background: color-mix(in srgb, var(--color-surface) 65%, transparent);
   backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--hairline-2);
+  box-shadow: 0 20px 50px -20px var(--shadow-mid);
 }
 .dock__app {
   position: relative;
@@ -47,16 +47,16 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
   border-radius: 0.8rem;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline);
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
 }
-.dock__app:hover { transform: translateY(-10px) scale(1.12); background: rgba(255, 255, 255, 0.08); }
+.dock__app:hover { transform: translateY(-10px) scale(1.12); background: var(--veil-3); }
 .dock__icon { font-size: 1.3rem; line-height: 1; }
 .dock__app--neon .dock__icon { color: var(--color-neon); }
 .dock__app--purple .dock__icon { color: var(--color-purple); }
-.dock__app--blue .dock__icon { color: #3b82f6; }
+.dock__app--blue .dock__icon { color: var(--color-blue); }
 
 .dock__tip {
   position: absolute;
@@ -71,9 +71,9 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
   letter-spacing: 0.01em;
   white-space: nowrap;
   color: var(--color-fog);
-  background: rgba(28, 28, 32, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.9);
+  background: var(--chrome-solid);
+  border: 1px solid var(--hairline-2);
+  box-shadow: 0 12px 30px -12px var(--shadow-strong);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.16s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -85,7 +85,7 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
   left: 50%;
   transform: translateX(-50%);
   border: 5px solid transparent;
-  border-top-color: rgba(28, 28, 32, 0.96);
+  border-top-color: var(--chrome-solid);
 }
 .dock__app:hover .dock__tip,
 .dock__app:focus-visible .dock__tip {
@@ -112,5 +112,5 @@ const { apps, isOpen, activeId, dockToggle } = useOS()
 .dock__app.is-active .dock__indicator { width: 14px; }
 .dock__app--neon.is-active .dock__indicator { background: var(--color-neon); box-shadow: 0 0 8px var(--color-neon); }
 .dock__app--purple.is-active .dock__indicator { background: var(--color-purple); box-shadow: 0 0 8px var(--color-purple); }
-.dock__app--blue.is-active .dock__indicator { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
+.dock__app--blue.is-active .dock__indicator { background: var(--color-blue); box-shadow: 0 0 8px var(--color-blue); }
 </style>

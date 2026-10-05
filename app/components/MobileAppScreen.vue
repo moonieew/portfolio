@@ -67,7 +67,7 @@ const dragStyle = computed(() => ({
 }
 .screen--neon::before { background: radial-gradient(80% 100% at 50% 0%, color-mix(in srgb, var(--color-neon) 16%, transparent), transparent 70%); }
 .screen--purple::before { background: radial-gradient(80% 100% at 50% 0%, color-mix(in srgb, var(--color-purple) 18%, transparent), transparent 70%); }
-.screen--blue::before { background: radial-gradient(80% 100% at 50% 0%, color-mix(in srgb, #3b82f6 18%, transparent), transparent 70%); }
+.screen--blue::before { background: radial-gradient(80% 100% at 50% 0%, color-mix(in srgb, var(--color-blue) 18%, transparent), transparent 70%); }
 
 .screen__bar {
   position: relative;
@@ -87,7 +87,7 @@ const dragStyle = computed(() => ({
   width: 38px;
   height: 5px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--hairline-3);
 }
 .screen__id { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
 .screen__id-icon {
@@ -97,12 +97,12 @@ const dragStyle = computed(() => ({
   place-items: center;
   border-radius: 0.6rem;
   font-size: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline-2);
 }
 .screen--neon .screen__id-icon { color: var(--color-neon); }
 .screen--purple .screen__id-icon { color: var(--color-purple); }
-.screen--blue .screen__id-icon { color: #3b82f6; }
+.screen--blue .screen__id-icon { color: var(--color-blue); }
 .screen__id-text { display: flex; flex-direction: column; }
 .screen__name { font-size: 0.92rem; font-weight: 700; }
 .screen__blurb { font-family: var(--font-mono); font-size: 0.62rem; color: var(--color-muted); }
@@ -114,12 +114,12 @@ const dragStyle = computed(() => ({
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--veil-2);
+  border: 1px solid var(--hairline-2);
   cursor: pointer;
 }
 
 .screen__body { position: relative; flex: 1; min-height: 0; overflow: hidden; }
-.screen__foot { flex: none; padding: 0.5rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.screen__foot { flex: none; padding: 0.5rem; text-align: center; border-top: 1px solid var(--hairline); }
 .screen__hint { font-family: var(--font-mono); font-size: 0.62rem; color: var(--color-muted); }
 </style>

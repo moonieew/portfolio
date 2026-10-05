@@ -157,14 +157,14 @@ const winStyle = computed(() => {
   background: color-mix(in srgb, var(--color-surface) 78%, transparent);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 30px 80px -40px var(--shadow-strong), 0 2px 8px var(--shadow-soft);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.win--active { box-shadow: 0 40px 110px -40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.06); }
+.win--active { box-shadow: 0 40px 110px -40px var(--shadow-strong), 0 0 0 1px var(--hairline); }
 .win--neon.win--active { border-color: color-mix(in srgb, var(--color-neon) 30%, transparent); }
 .win--purple.win--active { border-color: color-mix(in srgb, var(--color-purple) 32%, transparent); }
-.win--blue.win--active { border-color: color-mix(in srgb, #3b82f6 32%, transparent); }
+.win--blue.win--active { border-color: color-mix(in srgb, var(--color-blue) 32%, transparent); }
 .win--max { transition: none; }
 
 /* Title bar */
@@ -177,8 +177,8 @@ const winStyle = computed(() => {
   padding: 0 0.8rem;
   cursor: grab;
   user-select: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--veil-1);
 }
 .win__bar:active { cursor: grabbing; }
 .win__lights { display: flex; gap: 0.5rem; }
@@ -205,7 +205,7 @@ const winStyle = computed(() => {
 .win__title-icon { color: var(--color-muted); }
 .win--neon .win__title-icon { color: var(--color-neon); }
 .win--purple .win__title-icon { color: var(--color-purple); }
-.win--blue .win__title-icon { color: #3b82f6; }
+.win--blue .win__title-icon { color: var(--color-blue); }
 .win__meta {
   margin-left: auto;
   font-family: var(--font-mono);

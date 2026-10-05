@@ -34,7 +34,7 @@
           span {{ buffer }}
           span.ident__caret ▋
         p.ident__line.ident__final(v-else)
-          span.ident__prompt guest@anna-os:~$
+          span.ident__prompt guest@mn-os:~$
           span.ident__caret.is-idle ▋
 </template>
 
@@ -54,9 +54,9 @@ const stats = [
 ]
 
 const SCRIPT: Line[] = [
-  { prompt: 'guest@anna-os:~$', text: 'whoami', cls: 'is-cmd' },
+  { prompt: 'guest@mn-os:~$', text: 'whoami', cls: 'is-cmd' },
   { text: 'Lê Thị Minh Nguyệt (Anna)', cls: 'is-out' },
-  { prompt: 'guest@anna-os:~$', text: './build --target=production', cls: 'is-cmd' },
+  { prompt: 'guest@mn-os:~$', text: './build --target=production', cls: 'is-cmd' },
   { text: 'compiling identity… ok · 0 warnings', cls: 'is-ok' },
 ]
 
@@ -107,7 +107,7 @@ onUnmounted(() => {
   background: color-mix(in srgb, var(--color-surface) 55%, transparent);
   backdrop-filter: blur(16px) saturate(150%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--hairline);
   overflow-y: auto;
 }
 .ident__body { padding: clamp(1rem, 3vw, 1.8rem); font-family: var(--font-mono); }
@@ -116,8 +116,8 @@ onUnmounted(() => {
 .ident__card {
   padding: 1.3rem 1.3rem 1.4rem;
   border-radius: 0.85rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-1);
+  border: 1px solid var(--hairline);
 }
 .ident__status {
   display: inline-flex;
@@ -149,7 +149,7 @@ onUnmounted(() => {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.04;
-  background: linear-gradient(120deg, #fff 10%, #cfcfd6 55%, #8b8b95 100%);
+  background: linear-gradient(120deg, var(--title-a) 10%, var(--title-b) 55%, var(--title-c) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -165,10 +165,10 @@ onUnmounted(() => {
   font-family: var(--font-sans);
   font-size: 0.9rem;
   line-height: 1.65;
-  color: #c4c4cc;
+  color: var(--fog-soft);
   max-width: 52ch;
 }
-.ident__stats { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.ident__stats { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.2rem; padding-top: 1.1rem; border-top: 1px solid var(--hairline); }
 .ident__stat { display: flex; flex-direction: column; }
 .ident__stat-num { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 800; color: var(--color-fog); line-height: 1; }
 .ident__stat-label { margin-top: 0.3rem; font-size: 0.64rem; color: var(--color-muted); }

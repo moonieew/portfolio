@@ -36,6 +36,7 @@ Teleport(to="body")
 import { computed, nextTick, ref, watch } from 'vue'
 import { useCommandPalette } from '~/composables/useCommandPalette'
 import { useOS } from '~/composables/useOS'
+import { useTheme } from '~/composables/useTheme'
 import { profile } from '~/composables/useProfile'
 
 interface Command {
@@ -49,6 +50,7 @@ interface Command {
 
 const { open, hide } = useCommandPalette()
 const { apps, openApp } = useOS()
+const { theme, toggle: toggleTheme } = useTheme()
 
 function go(href: string, sameTab = false) {
   window.open(href, sameTab ? '_self' : '_blank', 'noopener,noreferrer')
@@ -69,6 +71,14 @@ const commands = computed<Command[]>(() => [
     kind: 'app',
     run: () => openApp(a.id),
   })),
+  {
+    id: 'sys:theme',
+    icon: theme.value === 'dark' ? '☀' : '☾',
+    accent: 'neon',
+    label: theme.value === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+    kind: 'system',
+    run: toggleTheme,
+  },
   ...links,
 ])
 
@@ -112,7 +122,7 @@ watch(results, () => (cursor.value = 0))
   align-items: flex-start;
   justify-content: center;
   padding-top: 14vh;
-  background: rgba(8, 8, 10, 0.55);
+  background: var(--scrim);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -122,22 +132,22 @@ watch(results, () => (cursor.value = 0))
   background: color-mix(in srgb, var(--color-surface) 86%, transparent);
   backdrop-filter: blur(30px) saturate(160%);
   -webkit-backdrop-filter: blur(30px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--hairline-2);
+  box-shadow: 0 40px 120px -30px var(--shadow-strong);
   overflow: hidden;
 }
-.cmd__search { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+.cmd__search { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1rem; border-bottom: 1px solid var(--hairline); }
 .cmd__search-ico { color: var(--color-neon); font-size: 0.95rem; }
 .cmd__input { flex: 1; min-width: 0; background: none; border: none; outline: none; color: var(--color-fog); font-size: 1rem; font-family: var(--font-sans); }
-.cmd__input::placeholder { color: #54545c; }
-.cmd__hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-muted); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 0.35rem; padding: 0.1rem 0.4rem; }
+.cmd__input::placeholder { color: var(--placeholder); }
+.cmd__hint { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-muted); border: 1px solid var(--hairline-2); border-radius: 0.35rem; padding: 0.1rem 0.4rem; }
 
 .cmd__list { max-height: 48vh; overflow-y: auto; padding: 0.4rem; margin: 0; list-style: none; }
 .cmd__item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.7rem; border-radius: 0.6rem; cursor: pointer; }
 .cmd__item.is-active { background: color-mix(in srgb, var(--color-neon) 14%, transparent); }
 .cmd__item-ico { flex: none; width: 26px; text-align: center; color: var(--color-neon); font-family: var(--font-mono); font-size: 0.85rem; }
 .cmd__item-ico.is-purple { color: var(--color-purple); }
-.cmd__item-ico.is-blue { color: #3b82f6; }
+.cmd__item-ico.is-blue { color: var(--color-blue); }
 .cmd__item-label { flex: 1; font-size: 0.9rem; }
 .cmd__item-kind { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; }
 .cmd__empty { padding: 1.4rem; text-align: center; color: var(--color-muted); font-size: 0.85rem; }

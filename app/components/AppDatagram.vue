@@ -11,7 +11,7 @@ SketchToScreen(
     .blueprint.bp-grid
       .blueprint__label SYSTEM ARCHITECTURE · v0
       svg.blueprint__svg(viewBox="0 0 480 230" preserveAspectRatio="xMidYMid meet")
-        g(stroke="#9aa0aa" fill="none" stroke-width="1.4")
+        g(style="stroke: var(--sketch)" fill="none" stroke-width="1.4")
           path.animate-dash(d="M90 56 L240 56" stroke-dasharray="5 5")
           path.animate-dash(d="M240 56 L240 112" stroke-dasharray="5 5")
           path.animate-dash(d="M240 112 L120 172" stroke-dasharray="5 5")
@@ -23,7 +23,7 @@ SketchToScreen(
           rect(x="190" y="98" width="100" height="32" rx="6")
           rect(x="70" y="158" width="100" height="32" rx="6")
           rect(x="310" y="158" width="100" height="32" rx="6")
-        g(fill="#c9ced6" font-family="monospace" font-size="11")
+        g(style="fill: var(--sketch-strong)" font-family="monospace" font-size="11")
           text(x="90" y="60" text-anchor="middle") Clients
           text(x="240" y="60" text-anchor="middle") Gateway
           text(x="370" y="60" text-anchor="middle") Auth
@@ -72,9 +72,9 @@ const ticks = [
 <style scoped>
 /* Blueprint */
 .blueprint { position: absolute; inset: 0; padding: 0.85rem; display: flex; flex-direction: column; }
-.blueprint__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: #9aa0aa; }
+.blueprint__label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; color: var(--sketch); }
 .blueprint__svg { flex: 1; width: 100%; min-height: 0; }
-.blueprint__note { font-family: var(--font-mono); font-size: 0.6rem; color: #7c8290; text-align: right; }
+.blueprint__note { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-muted); text-align: right; }
 
 /* Dashboard */
 .dash {
@@ -99,13 +99,13 @@ const ticks = [
   border: 1px solid color-mix(in srgb, var(--color-neon) 30%, transparent);
 }
 .dash__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; }
-.dash__stat { display: flex; flex-direction: column; gap: 0.08rem; padding: 0.45rem 0.55rem; border-radius: 0.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); }
+.dash__stat { display: flex; flex-direction: column; gap: 0.08rem; padding: 0.45rem 0.55rem; border-radius: 0.5rem; background: var(--veil-1); border: 1px solid var(--hairline); }
 .dash__stat-k { font-size: 0.56rem; letter-spacing: 0.08em; color: var(--color-muted); text-transform: uppercase; }
 .dash__stat-v { font-size: 1rem; font-weight: 700; font-family: var(--font-mono); }
 .dash__stat-d { font-size: 0.58rem; font-family: var(--font-mono); }
 .dash__stat-d.is-up { color: var(--color-neon); }
-.dash__stat-d.is-down { color: #ff6b6b; }
-.dash__chart { position: relative; flex: 1; min-height: 0; border-radius: 0.5rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); padding: 0.5rem; overflow: hidden; }
+.dash__stat-d.is-down { color: var(--color-red); }
+.dash__chart { position: relative; flex: 1; min-height: 0; border-radius: 0.5rem; background: var(--veil-1); border: 1px solid var(--hairline); padding: 0.5rem; overflow: hidden; }
 .dash__bars { display: flex; align-items: flex-end; gap: 4px; height: 100%; }
 .dash__bar { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-neon) 30%, transparent), var(--color-neon)); opacity: 0.85; }
 .dash__chart-tag { position: absolute; top: 0.4rem; right: 0.5rem; font-family: var(--font-mono); font-size: 0.56rem; color: var(--color-neon); }

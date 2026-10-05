@@ -137,12 +137,12 @@ const auraStyle = computed(() => ({
   padding: 0.24rem 0.55rem;
   border-radius: 999px;
   color: var(--color-fog);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--veil-1);
+  border: 1px solid var(--hairline);
 }
 .s2s--neon .s2s__chip { border-color: color-mix(in srgb, var(--color-neon) 18%, transparent); }
 .s2s--purple .s2s__chip { border-color: color-mix(in srgb, var(--color-purple) 22%, transparent); }
-.s2s--blue .s2s__chip { border-color: color-mix(in srgb, #3b82f6 22%, transparent); }
+.s2s--blue .s2s__chip { border-color: color-mix(in srgb, var(--color-blue) 22%, transparent); }
 
 /* Frame */
 .s2s__frame {
@@ -151,7 +151,7 @@ const auraStyle = computed(() => ({
   max-height: 56vh;
   border-radius: 0.85rem;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--hairline);
   background: var(--color-ink);
 }
 .s2s__aura {
@@ -164,7 +164,7 @@ const auraStyle = computed(() => ({
 }
 .s2s--neon .s2s__aura { background: radial-gradient(60% 100% at 50% 0%, var(--color-neon), transparent 70%); }
 .s2s--purple .s2s__aura { background: radial-gradient(60% 100% at 50% 0%, var(--color-purple), transparent 70%); }
-.s2s--blue .s2s__aura { background: radial-gradient(60% 100% at 50% 0%, #3b82f6, transparent 70%); }
+.s2s--blue .s2s__aura { background: radial-gradient(60% 100% at 50% 0%, var(--color-blue), transparent 70%); }
 
 .s2s__layer { position: absolute; inset: 0; }
 .s2s__sketch { filter: grayscale(1) contrast(1.05); }
@@ -185,11 +185,11 @@ const auraStyle = computed(() => ({
 .s2s__seam { position: absolute; top: 0; bottom: 0; width: 2px; transform: translateX(-1px); pointer-events: none; transition: opacity 0.2s linear; }
 .s2s--neon .s2s__seam { background: linear-gradient(var(--color-neon), transparent); box-shadow: 0 0 16px var(--color-neon); }
 .s2s--purple .s2s__seam { background: linear-gradient(var(--color-purple), transparent); box-shadow: 0 0 16px var(--color-purple); }
-.s2s--blue .s2s__seam { background: linear-gradient(#3b82f6, transparent); box-shadow: 0 0 16px #3b82f6; }
+.s2s--blue .s2s__seam { background: linear-gradient(var(--color-blue), transparent); box-shadow: 0 0 16px var(--color-blue); }
 .s2s__seam-dot { position: absolute; top: 0; left: 50%; width: 9px; height: 9px; border-radius: 999px; transform: translateX(-50%); }
 .s2s--neon .s2s__seam-dot { background: var(--color-neon); box-shadow: 0 0 12px var(--color-neon); }
 .s2s--purple .s2s__seam-dot { background: var(--color-purple); box-shadow: 0 0 12px var(--color-purple); }
-.s2s--blue .s2s__seam-dot { background: #3b82f6; box-shadow: 0 0 12px #3b82f6; }
+.s2s--blue .s2s__seam-dot { background: var(--color-blue); box-shadow: 0 0 12px var(--color-blue); }
 .s2s__seam-flag {
   position: absolute;
   top: 8px;
@@ -203,21 +203,21 @@ const auraStyle = computed(() => ({
 }
 .s2s--neon .s2s__seam-flag { background: var(--color-neon); }
 .s2s--purple .s2s__seam-flag { background: var(--color-purple); }
-.s2s--blue .s2s__seam-flag { background: #3b82f6; }
+.s2s--blue .s2s__seam-flag { background: var(--color-blue); }
 
 /* Footer */
 .s2s__foot { display: flex; align-items: center; gap: 0.8rem; }
-.s2s__track { flex: 1; height: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.07); overflow: hidden; }
+.s2s__track { flex: 1; height: 3px; border-radius: 999px; background: var(--veil-3); overflow: hidden; }
 .s2s__fill { height: 100%; border-radius: 999px; transition: width 0.08s linear; }
 .s2s--neon .s2s__fill { background: var(--color-neon); box-shadow: 0 0 12px var(--color-neon); }
 .s2s--purple .s2s__fill { background: var(--color-purple); box-shadow: 0 0 12px var(--color-purple); }
-.s2s--blue .s2s__fill { background: #3b82f6; box-shadow: 0 0 12px #3b82f6; }
+.s2s--blue .s2s__fill { background: var(--color-blue); box-shadow: 0 0 12px var(--color-blue); }
 .s2s__phase { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--color-muted); }
 .s2s__phase-arrow { opacity: 0.5; }
 .s2s__phase--on { color: var(--color-fog); }
 .s2s--neon .s2s__phase--on { color: var(--color-neon); }
 .s2s--purple .s2s__phase--on { color: var(--color-purple); }
-.s2s--blue .s2s__phase--on { color: #3b82f6; }
+.s2s--blue .s2s__phase--on { color: var(--color-blue); }
 
 /* Scroll runway */
 .s2s__spacer { display: flex; align-items: flex-start; justify-content: center; }
