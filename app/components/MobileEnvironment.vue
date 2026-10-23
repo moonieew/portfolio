@@ -1,8 +1,7 @@
 <template lang="pug">
 .mob
   .mob__wall
-    .mob__orb.mob__orb--neon
-    .mob__orb.mob__orb--purple
+    OSWallpaper
 
   //- Status bar
   header.mob__status
@@ -56,9 +55,6 @@ const clock = computed(() =>
 <style scoped>
 .mob { position: absolute; inset: 0; overflow: hidden; display: flex; flex-direction: column; }
 .mob__wall { position: absolute; inset: 0; background: var(--color-ink); }
-.mob__orb { position: absolute; width: 24rem; height: 24rem; border-radius: 999px; filter: blur(110px); opacity: 0.22; }
-.mob__orb--neon { top: -8rem; left: -8rem; background: var(--color-neon); }
-.mob__orb--purple { bottom: -8rem; right: -8rem; background: var(--color-purple); }
 
 .mob__status {
   position: relative;

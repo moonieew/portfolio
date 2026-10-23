@@ -3,9 +3,7 @@ Transition(name="lock")
   .lock(v-if="locked")
     //- Wallpaper
     .lock__wall
-      .lock__orb.lock__orb--neon
-      .lock__orb.lock__orb--purple
-      .lock__grid.bp-grid
+      OSWallpaper
       .lock__vignette
 
     //- Theme switch (top-right, like a lock-screen control)
@@ -95,10 +93,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 
 /* ---- Wallpaper ---- */
 .lock__wall { position: absolute; inset: 0; }
-.lock__orb { position: absolute; width: 40rem; height: 40rem; border-radius: 999px; filter: blur(130px); opacity: 0.2; }
-.lock__orb--neon { top: -16rem; left: -10rem; background: var(--color-neon); }
-.lock__orb--purple { bottom: -18rem; right: -10rem; background: var(--color-purple); }
-.lock__grid { position: absolute; inset: 0; opacity: 0.2; mask-image: radial-gradient(60% 55% at 50% 45%, #000 25%, transparent 75%); }
 .lock__vignette { position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 50%, transparent 55%, var(--vignette)); }
 
 /* ---- Theme switch ---- */

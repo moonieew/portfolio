@@ -1,10 +1,8 @@
 <template lang="pug">
 .desk
-  //- Wallpaper
+  //- Wallpaper — flat ink + interactive lattice (hover repels, click ripples)
   .desk__wall
-    .desk__orb.desk__orb--neon
-    .desk__orb.desk__orb--purple
-    .desk__grid.bp-grid
+    OSWallpaper
 
   //- Menu bar (desktop only — lives in the desktop shell)
   TopMenuBar
@@ -51,10 +49,6 @@ onMounted(() => {
 
 /* Wallpaper */
 .desk__wall { position: absolute; inset: 0; background: var(--color-ink); }
-.desk__orb { position: absolute; width: 46rem; height: 46rem; border-radius: 999px; filter: blur(140px); opacity: 0.18; }
-.desk__orb--neon { top: -18rem; left: -12rem; background: var(--color-neon); }
-.desk__orb--purple { bottom: -20rem; right: -12rem; background: var(--color-purple); }
-.desk__grid { position: absolute; inset: 0; opacity: 0.25; mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 78%); }
 
 /* Welcome */
 .desk__welcome {
@@ -69,10 +63,7 @@ onMounted(() => {
   font-size: clamp(1.6rem, 5vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(120deg, var(--title-a), var(--title-c));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--title-a);
 }
 .desk__welcome-sub { margin-top: 0.5rem; font-size: 1rem; color: var(--color-muted); }
 .desk__welcome-hint { margin-top: 1.4rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-neon); }
