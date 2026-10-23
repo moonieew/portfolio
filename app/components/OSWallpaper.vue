@@ -51,6 +51,9 @@ let waves: Wave[] = []
 
 let fogRgb: [number, number, number] = [233, 237, 242]
 let purpleRgb: [number, number, number] = [139, 92, 246]
+// Resting-grid line alphas (top of ceiling / bottom of floor), set per theme.
+let grayTopA = 0.16
+let grayBottomA = 0.42
 
 function hexToRgb(hex: string, fb: [number, number, number]): [number, number, number] {
   const h = hex.trim().replace('#', '')
@@ -68,14 +71,17 @@ function readPalette() {
   const css = getComputedStyle(document.documentElement)
   fogRgb = hexToRgb(css.getPropertyValue('--color-fog') || '', [233, 237, 242])
   purpleRgb = hexToRgb(css.getPropertyValue('--color-purple') || '', [139, 92, 246])
+  const isLight = document.documentElement.classList.contains('light')
+  grayTopA = isLight ? 0.08 : 0.16
+  grayBottomA = isLight ? 0.22 : 0.42
   if (ctx) buildGrayGradient()
 }
 
 function buildGrayGradient() {
   const g = ctx!.createLinearGradient(0, 0, 0, H)
-  g.addColorStop(0, rgba(fogRgb, 0.1)) // faint ceiling
+  g.addColorStop(0, rgba(fogRgb, grayTopA)) // faint ceiling
   g.addColorStop(HORIZON, rgba(fogRgb, 0)) // dissolve at the horizon
-  g.addColorStop(1, rgba(fogRgb, 0.22)) // strongest at the bottom
+  g.addColorStop(1, rgba(fogRgb, grayBottomA)) // strongest at the bottom
   grayGrad = g
 }
 
