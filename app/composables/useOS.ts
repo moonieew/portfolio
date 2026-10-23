@@ -88,9 +88,9 @@ const APPS: AppDef[] = [
     short: 'Work',
     icon: '▤',
     accent: 'blue',
-    blurb: 'Work history · Finder',
+    blurb: 'Career timeline · scroll',
     component: markRaw(AppExperience),
-    size: { w: 880, h: 560 },
+    size: { w: 720, h: 600 },
   },
   {
     id: 'creative',
